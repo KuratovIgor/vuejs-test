@@ -16,12 +16,8 @@
 </template>
 
 <script>
-import UiTable from '@/components/UI/Table.vue';
-
 export default {
-
   name: 'DataTable',
-  components: { UiTable },
 
   props: {
     rows: {

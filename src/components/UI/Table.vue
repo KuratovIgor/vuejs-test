@@ -1,10 +1,20 @@
 <template>
   <div class="ui-table">
     <div class="ui-table__row ui-table__header">
-      <div v-for="(column, index) in columns" :key="index" class="ui-table__cell">{{ column.label }}</div>
+      <div
+        v-for="(column, index) in columns"
+        :key="index"
+        class="ui-table__cell"
+      >
+        {{ column.label }}
+      </div>
     </div>
 
-    <div v-for="row in rows" :key="row.id" class="ui-table__row">
+    <div
+      v-for="row in rows"
+      :key="row.id"
+      class="ui-table__row"
+    >
       <div class="ui-table__cell">{{ row.id }}</div>
       <div class="ui-table__cell">{{ row.date }}</div>
       <div class="ui-table__cell">{{ row.name }}</div>
