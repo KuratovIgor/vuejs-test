@@ -4,7 +4,7 @@
       <ui-money v-model="moneyFilter" />
     </div>
 
-    <!-- Your component code here -->
+    <ui-table :rows="rows" :columns="columns" />
 
     <div class="data-table__paginator">
       <ui-pagination
@@ -17,7 +17,6 @@
 
 <script>
 export default {
-
   name: 'DataTable',
 
   props: {
@@ -44,3 +43,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.data-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__filter {
+    align-self: flex-end;
+    margin-bottom: 20px;
+  }
+
+  &__paginator {
+    align-self: flex-start;
+    margin-top: 20px;
+  }
+}
+</style>
