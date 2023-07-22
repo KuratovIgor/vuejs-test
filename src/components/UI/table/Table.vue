@@ -24,7 +24,12 @@
     </template>
 
     <template v-else>
-      <ui-table-card v-for="row in rows" :key="row.id" class="ui-table__card" :row="row" />
+      <ui-table-card
+        v-for="row in rows"
+        :key="row.id"
+        class="ui-table__card"
+        :row="row"
+      />
     </template>
   </div>
 </template>
