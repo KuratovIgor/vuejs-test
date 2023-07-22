@@ -4,7 +4,7 @@
       <ui-money v-model="moneyFilter" />
     </div>
 
-    <ui-table :rows="rows" :columns="columns" />
+    <ui-table :rows="paginatedRows" :columns="columns" />
 
     <div class="data-table__paginator">
       <ui-pagination
@@ -39,6 +39,13 @@ export default {
   computed: {
     pageCount() {
       return Math.ceil(this.rows.length / this.pageSize);
+    },
+
+    paginatedRows() {
+      const lastId = this.page * this.pageSize;
+      const firstId = lastId - this.pageSize + 1;
+
+      return this.rows.filter((row) => firstId <= row.id && row.id <= lastId);
     },
   },
 };
