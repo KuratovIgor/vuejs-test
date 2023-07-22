@@ -17,9 +17,9 @@
         class="ui-table__row"
       >
         <div class="ui-table__cell">{{ row.id }}</div>
-        <div class="ui-table__cell">{{ row.date }}</div>
+        <div class="ui-table__cell">{{ getFormattedDate(row.date) }}</div>
         <div class="ui-table__cell">{{ row.name }}</div>
-        <div class="ui-table__cell">{{ row.money }}</div>
+        <div class="ui-table__cell">{{ getFormattedMoney(row.money) }}</div>
       </div>
     </template>
 
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { getFormattedDate, getFormattedMoney } from '@/utils/helpers';
+
 export default {
   name: 'UiTable',
 
@@ -47,6 +49,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+
+  methods: {
+    getFormattedDate,
+    getFormattedMoney,
   },
 };
 </script>

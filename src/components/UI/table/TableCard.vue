@@ -7,7 +7,7 @@
 
     <div class="table-card__content">
       <div class="table-card__title">Date</div>
-      <div>{{ row.date }}</div>
+      <div>{{ getFormattedDate(row.date) }}</div>
     </div>
 
     <div class="table-card__content">
@@ -17,12 +17,14 @@
 
     <div>
       <div class="table-card__title">Money</div>
-      <div>{{ row.money }}</div>
+      <div>{{ getFormattedMoney(row.money) }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { getFormattedDate, getFormattedMoney } from '@/utils/helpers';
+
 export default {
   name: 'UiTableCard',
 
@@ -31,6 +33,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  methods: {
+    getFormattedDate,
+    getFormattedMoney,
   },
 };
 </script>
