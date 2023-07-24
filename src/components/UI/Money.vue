@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <input
-      type="text"
-      v-model="valueInput"
-      class="ui-money"
-      @input="handleInput"
-    />
-  </div>
+  <input
+    type="text"
+    v-model="valueInput"
+    class="ui-money"
+    @input="handleInput"
+  />
 </template>
 
 <script>
@@ -25,16 +23,16 @@ export default {
 
   data() {
     return {
-      valueInput: this.value ?? '',
+      valueInput: '',
     };
   },
 
   methods: {
-    isValueInputValid() {
+    isInputValueValid() {
       // const numberRegex = /^[+-]?\d+(\.\d+)?$/;
-      const numberRegex = /[0-9 ]+$/;
+      const numbersRegex = /[0-9 ]+$/;
 
-      return numberRegex.test(this.valueInput);
+      return numbersRegex.test(this.valueInput);
     },
 
     replaceCommaWithDot() {
@@ -54,7 +52,7 @@ export default {
 
       if (this.valueInput.slice(-1) === '.') return;
 
-      if (!this.isValueInputValid()) {
+      if (!this.isInputValueValid()) {
         this.removeLastSymbolOfValue();
       }
 
