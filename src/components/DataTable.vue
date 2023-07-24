@@ -38,14 +38,22 @@ export default {
 
   computed: {
     pageCount() {
-      return Math.ceil(this.rows.length / this.pageSize);
+      return Math.ceil(this.searchedRows.length / this.pageSize);
+    },
+
+    searchedRows() {
+      if (!this.moneyFilter) {
+        return this.rows;
+      }
+
+      return this.rows.filter((row) => row.money <= this.moneyFilter);
     },
 
     paginatedRows() {
       const lastId = this.page * this.pageSize;
       const firstId = lastId - this.pageSize + 1;
 
-      return this.rows.filter((row) => firstId <= row.id && row.id <= lastId);
+      return this.searchedRows.filter((row) => firstId <= row.id && row.id <= lastId);
     },
   },
 };
