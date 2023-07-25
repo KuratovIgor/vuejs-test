@@ -1,8 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import api from '@/api';
+import getPayments from '@/mocks/getPayments';
 
 Vue.use(Vuex);
+
+const getPaymentsData = async (params) => {
+  let data;
+
+  if (process.env.NODE_ENV === 'production') {
+    data = await api.getPayments(params);
+  } else {
+    data = await getPayments(params);
+  }
+
+  return data;
+};
 
 export default new Vuex.Store({
 
@@ -32,7 +45,7 @@ export default new Vuex.Store({
       commit('setState', { isLoading: true });
 
       try {
-        const { data } = await api.getPayments(params);
+        const { data } = await getPaymentsData(params);
 
         if (Array.isArray(data)) {
           commit('setState', { data });
