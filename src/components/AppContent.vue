@@ -10,7 +10,7 @@
           <p>You can clear cache and load data again.</p>
         </template>
         <template #footer>
-          <ui-button type="primary">
+          <ui-button type="primary" @click="handleCacheClear">
             Clear cache
           </ui-button>
         </template>
@@ -72,6 +72,11 @@ export default {
     ...mapActions([
       'load',
     ]),
+
+    handleCacheClear() {
+      localStorage.removeItem('data');
+      this.load();
+    },
   },
 };
 </script>

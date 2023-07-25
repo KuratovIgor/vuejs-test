@@ -41,14 +41,23 @@ export default new Vuex.Store({
   },
 
   actions: {
-    async load({ commit }, params = {}) {
-      commit('setState', { isLoading: true });
+    async load({ commit, state }, params = {}) {
+      const dataFromCache = JSON.parse(localStorage.getItem('data'));
+
+      if (dataFromCache) {
+        commit('setState', { isCached: true, data: dataFromCache });
+        return;
+      }
+
+      commit('setState', { isLoading: true, isCached: false });
 
       try {
         const { data } = await getPaymentsData(params);
 
         if (Array.isArray(data)) {
           commit('setState', { data });
+
+          localStorage.setItem('data', JSON.stringify(data));
         }
       } catch (e) {
         // eslint-disable-next-line no-alert
