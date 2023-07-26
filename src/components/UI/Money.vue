@@ -29,10 +29,10 @@ export default {
 
   methods: {
     isInputValueValid() {
-      // const numberRegex = /^[+-]?\d+(\.\d+)?$/;
       const numbersRegex = /[0-9 ]+$/;
+      const dotRegex = /[.]/g;
 
-      return numbersRegex.test(this.valueInput) || this.valueInput.match(/[.]/g)?.length === 1;
+      return numbersRegex.test(this.valueInput) || this.valueInput.match(dotRegex)?.length === 1;
     },
 
     replaceCommaWithDot() {
