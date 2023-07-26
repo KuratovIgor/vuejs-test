@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import api from '@/api';
 import getPayments from '@/mocks/getPayments';
+import cachePlugin from '@/store/plugins/cachePlugin';
 
 Vue.use(Vuex);
 
@@ -18,6 +19,8 @@ const getPaymentsData = async (params) => {
 };
 
 export default new Vuex.Store({
+
+  plugins: [cachePlugin],
 
   state: () => ({
     data: [],
@@ -42,29 +45,32 @@ export default new Vuex.Store({
 
   actions: {
     async load({ commit, state }, params = {}) {
-      const dataFromCache = JSON.parse(localStorage.getItem('data'));
+      commit('setState', { isLoading: true });
 
-      if (dataFromCache) {
-        commit('setState', { isCached: true, data: dataFromCache });
+      if (state.isCached) {
+        alert('Data fetched from cache!');
+
         return;
       }
-
-      commit('setState', { isLoading: true, isCached: false });
 
       try {
         const { data } = await getPaymentsData(params);
 
         if (Array.isArray(data)) {
           commit('setState', { data });
-
-          localStorage.setItem('data', JSON.stringify(data));
         }
       } catch (e) {
         // eslint-disable-next-line no-alert
         alert(e?.message);
       } finally {
         commit('setState', { isLoading: false });
+
+        alert('Data fetched from API!');
       }
+    },
+
+    disableCache({ commit }) {
+      commit('setState', { isCached: false });
     },
   },
 });

@@ -71,10 +71,11 @@ export default {
   methods: {
     ...mapActions([
       'load',
+      'disableCache',
     ]),
 
     handleCacheClear() {
-      localStorage.removeItem('data');
+      this.disableCache();
       this.load();
     },
   },

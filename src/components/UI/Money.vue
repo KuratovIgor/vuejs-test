@@ -32,7 +32,7 @@ export default {
       // const numberRegex = /^[+-]?\d+(\.\d+)?$/;
       const numbersRegex = /[0-9 ]+$/;
 
-      return numbersRegex.test(this.valueInput);
+      return numbersRegex.test(this.valueInput) || this.valueInput.match(/[.]/g)?.length === 1;
     },
 
     replaceCommaWithDot() {
@@ -50,11 +50,11 @@ export default {
     handleInput() {
       this.replaceCommaWithDot();
 
-      if (this.valueInput.slice(-1) === '.') return;
-
       if (!this.isInputValueValid()) {
         this.removeLastSymbolOfValue();
       }
+
+      if (this.valueInput.slice(-1) === '.') return;
 
       this.valueInput = getFormattedMoney(this.getValueWithoutSpaces());
 
