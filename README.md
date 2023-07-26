@@ -1,10 +1,12 @@
 # Vuejs test
 
+------
 ## Start app via Docker
 ```
 docker-compose up
 ```
-And [open in browser](http://localhost:3000)
+### And [open in browser](http://localhost:3000)
+------
 
 ## Project setup
 ```
