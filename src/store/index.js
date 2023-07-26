@@ -7,13 +7,18 @@ import cachePlugin from '@/store/plugins/cachePlugin';
 Vue.use(Vuex);
 
 const getPaymentsData = async (params) => {
-  let data;
+  // Нужно для переключения логики получения данных
+  // Закомментил с целью работы приложения в докере
 
-  if (process.env.NODE_ENV === 'production') {
-    data = await api.getPayments(params);
-  } else {
-    data = await getPayments(params);
-  }
+  // let data;
+  //
+  // if (process.env.NODE_ENV === 'production') {
+  //   data = await api.getPayments(params);
+  // } else {
+  //   data = await getPayments(params);
+  // }
+
+  const data = await getPayments(params);
 
   return data;
 };
